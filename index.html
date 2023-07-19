@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Create Colection</title>
+    </head>
+    <body>
+        <header>
+            <h1>Create your car colection</h1>
+        </header>
+        <section>
+            <div class="type">
+                Choose a type car:
+            </div>
+            <div class="input">
+                <input type="radio" name="type" id="idNormal">
+                <p>Normal</p>
+                <input type="radio" name="type" id="idTruck">
+                <p>Truck</p>
+                <input type="radio" name="type" id="idMilitary">
+                <p>Military</p> 
+            </div>
+            <div class="forms">
+                <div>
+                    <input type="text" name="idName" id="idName" class="styleInput" placeholder="Name">
+                </div>
+                <div>
+                    <input type="number" nade="inDoor" id="idDoor" class="styleInput" placeholder="Door">
+                </div>
+                <div>
+                    <input type="number" nade="idSeat" id="idSeat" class="styleInput" placeholder="Seat">
+                </div>
+                <div>
+                    <input type="number" name="idWheels" id="idWheels" class="styleInput" placeholder="Wheels">
+                </div>
+                <div>
+                    <input type="number" name="idCargo" id="idCargo" class="styleInput" placeholder="Ton Cargo">
+                </div>
+                <div>
+                    <input type="number" name="idArmor" id="idArmor" class="styleInput" placeholder="Armor">
+                </div>
+                <div>
+                    <input type="number" name="idAmmun" id="idAmmun" class="styleInput" placeholder="Ammunition">
+                </div>
+
+            </div>
+            <div>
+                <button type="submit" id="btnAdd">Add</button>
+            </div> 
+        </section>
+        <div id="res">
+
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
