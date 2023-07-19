@@ -13,6 +13,7 @@ const idWheels = document.querySelector('#idWheels');
 const idCargo = document.querySelector('#idCargo');
 const idArmor = document.querySelector('#idArmor');
 const idAmmunition = document.querySelector('#idAmmun');
+
 const blockInputs = () => {
     idCargo.readOnly = true;
     idWheels.readOnly = true;
@@ -100,17 +101,13 @@ class MilitaryCar extends Car{
     }
 }
 
-blockInputs()
+blockInputs();
 
 idNormal.addEventListener('change', () => {
-    blockInputs()
+    blockInputs();
     idDoor.readOnly = false;
     idSeat.readOnly = false;
     idName.readOnly = false;
-    idCargo.style.background = '#b19a9a'
-    idWheels.style.background = '#b19a9a'
-    idArmor.style.background = '#b19a9a'
-    idAmmunition.style.background = '#b19a9a'
     idName.style.background = '#fff'
     idDoor.style.background = '#fff'
     idSeat.style.background = '#fff'
@@ -123,8 +120,6 @@ idTruck.addEventListener('change', () => {
     idSeat.readOnly = false;
     idCargo.readOnly = false;
     idWheels.readOnly = false;
-    idArmor.style.background = '#b19a9a'
-    idAmmunition.style.background = '#b19a9a'
     idName.style.background = '#fff'
     idDoor.style.background = '#fff'
     idSeat.style.background = '#fff'
@@ -134,14 +129,11 @@ idTruck.addEventListener('change', () => {
 
 idMilitary.addEventListener('change', () => {
     blockInputs()
-
     idName.readOnly = false;
     idDoor.readOnly = false;
     idSeat.readOnly = false;
     idArmor.readOnly = false;
     idAmmunition.readOnly = false;
-    idCargo.style.background = '#b19a9a'
-    idWheels.style.background = '#b19a9a'
     idName.style.background = '#fff'
     idDoor.style.background = '#fff'
     idSeat.style.background = '#fff'
@@ -151,36 +143,38 @@ idMilitary.addEventListener('change', () => {
 
 const addCar = () => {
     if (idNormal.checked) {
-
         console.log('NormalChecking');
         const name = idName.value;
         const door = idDoor.value;
         const seat = idSeat.value;
         
-        const normal = new NormalCar(name, door, seat);
-        idName.value = '';
-        idDoor.value = '';
-        idSeat.value = '';
-        
-        console.log(normal.info());
-        
-        const div = document.createElement("div");
-        const resBtnRemove = document.createElement('div');
-        resBtnRemove.setAttribute('class','resBtnRemove');
-        const btn = document.createElement("button");
-        btn.setAttribute("type", "button");
-        btn.setAttribute("class", "remove");
-        btn.innerHTML = "X";
-        resBtnRemove.appendChild(btn);
-        div.setAttribute("class", 'carros');
-        div.innerHTML = normal.info();
-        res.appendChild(div);
-        div.appendChild(resBtnRemove);
-        btn.addEventListener('click', () => {
-            div.remove();
-            console.log('Normal Removed');
-        });
+        if (name.length > 0 && door.length > 0 && seat.length > 0) {
+            const normal = new NormalCar(name, door, seat);
+            idName.value = '';
+            idDoor.value = '';
+            idSeat.value = '';
+                        
+            const div = document.createElement("div");
+            const resBtnRemove = document.createElement('div');
+            resBtnRemove.setAttribute('class','resBtnRemove');
+            const btn = document.createElement("button");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("class", "remove");
+            btn.innerHTML = "X";
+            resBtnRemove.appendChild(btn);
+            div.setAttribute("class", 'carros');
+            div.innerHTML = normal.info();
+            res.appendChild(div);
+            div.appendChild(resBtnRemove);
+            btn.addEventListener('click', () => {
+                div.remove();
+                console.log('Normal Removed');
+            });
 
+        } else {
+            alert('Please fill all the fields');
+        }
+        
     }else if (idTruck.checked) {
         console.log('Truck Checking');
         const name = idName.value;
@@ -189,30 +183,35 @@ const addCar = () => {
         const seat = idSeat.value;
         const wheels = idWheels.value;
 
-        const truck = new TruckCar(name, door, cargo, seat, wheels);
-        idName.value = '';
-        idDoor.value = '';
-        idCargo.value = '';
-        idSeat.value = '';
-        idWheels.value = '';
-        console.log(truck.info());
-        
-        const div = document.createElement("div");
-        const resBtnRemove = document.createElement('div');
-        resBtnRemove.setAttribute('class','resBtnRemove');
-        const btn = document.createElement("button");
-        btn.setAttribute("type", "button");
-        btn.setAttribute("class", "remove");
-        btn.innerHTML = "X";
-        resBtnRemove.appendChild(btn);
-        div.setAttribute("class", 'carros');
-        div.innerHTML = truck.info();
-        res.appendChild(div);
-        div.appendChild(resBtnRemove);
-        btn.addEventListener('click', () => {
-            div.remove();
-            console.log('Truck Removed');
-        });
+        if (name.length > 0 && door.length > 0 && seat.length > 0 && cargo.length > 0 && wheels.length > 0) {
+            const truck = new TruckCar(name, door, cargo, seat, wheels);
+            idName.value = '';
+            idDoor.value = '';
+            idCargo.value = '';
+            idSeat.value = '';
+            idWheels.value = '';
+            
+            const div = document.createElement("div");
+            const resBtnRemove = document.createElement('div');
+            resBtnRemove.setAttribute('class','resBtnRemove');
+            const btn = document.createElement("button");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("class", "remove");
+            btn.innerHTML = "X";
+            resBtnRemove.appendChild(btn);
+            div.setAttribute("class", 'carros');
+            div.innerHTML = truck.info();
+            res.appendChild(div);
+            div.appendChild(resBtnRemove);
+            btn.addEventListener('click', () => {
+                div.remove();
+                console.log('Truck Removed');
+            });
+            
+        } else {
+            alert('Please fill all the fields');
+        }
+
         
     }else if (idMilitary.checked) {
         console.log('Military Checking');
@@ -222,30 +221,34 @@ const addCar = () => {
         const ammunition = idAmmunition.value;
         const seat = idSeat.value;
 
-        const military = new MilitaryCar(name, door, seat, armor, ammunition);
-        idName.value = '';
-        idDoor.value = '';
-        idArmor.value = '';
-        idAmmunition.value = '';
-        idSeat.value = ''
-        console.log(military.info());
+        if (name.length > 0 && door.length > 0 && seat.length > 0 && armor.length > 0 && ammunition.length > 0) {
+            const military = new MilitaryCar(name, door, seat, armor, ammunition);
+            idName.value = '';
+            idDoor.value = '';
+            idArmor.value = '';
+            idAmmunition.value = '';
+            idSeat.value = ''
 
-        const div = document.createElement("div");
-        const resBtnRemove = document.createElement('div');
-        resBtnRemove.setAttribute('class','resBtnRemove');
-        const btn = document.createElement("button");
-        btn.setAttribute("type", "button");
-        btn.setAttribute("class", "remove");
-        btn.innerHTML = "X";
-        resBtnRemove.appendChild(btn);
-        div.setAttribute("class", 'carros');
-        div.innerHTML = military.info();
-        res.appendChild(div);
-        div.appendChild(resBtnRemove);
-        btn.addEventListener('click', () => {
-            div.remove();
-            console.log('Military Removed');
-        });
+            const div = document.createElement("div");
+            const resBtnRemove = document.createElement('div');
+            resBtnRemove.setAttribute('class', 'resBtnRemove');
+            const btn = document.createElement("button");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("class", "remove");
+            btn.innerHTML = "X";
+            resBtnRemove.appendChild(btn);
+            div.setAttribute("class", 'carros');
+            div.innerHTML = military.info();
+            res.appendChild(div);
+            div.appendChild(resBtnRemove);
+            btn.addEventListener('click', () => {
+                div.remove();
+                console.log('Military Removed');
+            });
+
+        } else {
+            alert('Please fill all the fields');
+        }
     }
 }
 
